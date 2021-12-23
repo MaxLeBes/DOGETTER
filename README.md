@@ -1,7 +1,8 @@
-##DOGETTER - Le CRAWLER qui a du Chien
-#Réalisé dans le cadre du cursus LINUX avec le professeur Kévin Frugier
+# DOGETTER - Le CRAWLER qui a du Chien
 
-**Installation sur LINUX :** 
+## Réalisé dans le cadre du cursus LINUX avec le professeur Kévin Frugier
+
+#### Installation sur LINUX : 
 - Télécharger le inst.sh
 - faire la commande suivante :
 
