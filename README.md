@@ -15,3 +15,5 @@
 >Le Programme télécharge automatiquement les autres ressources depuis le serveur.
 > 
 > Le lieu d'éxécution du programme sera /usr/local/DogRandom
+
+Le programme obéit à systemctl
