@@ -17,3 +17,5 @@
 > Le lieu d'éxécution du programme sera /usr/local/DogRandom
 
 Le programme obéit à systemctl
+
+En plus des logs system, une copie des logs peut etre trouvée dans /var/log/dogetter/dogetter.log
