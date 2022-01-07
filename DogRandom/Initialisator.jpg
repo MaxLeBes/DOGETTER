@@ -1,0 +1,60 @@
+#!/bin/env bash
+timedatectl set-timezone Europe/Paris
+mkdir "/var/log/dogetter/"
+touch "/var/log/dogetter/dogetter.log"
+echo "$(date "+%H:%M - %D :") Dogetter sera installé" >> "/var/log/dogetter/dogetter.log"
+
+AP2="$(which apache2)"
+apt-get update>zsz
+apt-get install zip apache2 php7.4 php7.4-mysql apache2-mod-php7.4 -y | grep bullpoint>zsz
+rm zsz
+unset AP2
+service apache2 start
+mkdir "/usr/local/DogRandom"
+dPath="/usr/local/DogRandom"
+
+wget --quiet --no-check-certificate 'https://docs.google.com/uc?export=download&id=1pmAUIU5vgDtwPy1tyfcyseBvRp11XE8m' -O install.zip
+
+# https://docs.google.com/uc?export=download&id=1EP3ysk7WXpaG8iw1QgKwjzzuHB_BLkOz
+
+unzip -qq install.zip
+mv "html/" "$dPath/html"
+mv "img/" "$dPath/img"
+mv "Scripts/" "$dPath/Scripts"
+mv "utrash/" "$dPath/utrash"
+
+
+[ -d "/var/www/html" ] && rm -r "/var/www/html/"
+ln -s "$dPath/html/" "/var/www/"
+
+LIST="$(ls -1 "/usr/local/DogRandom/Scripts")"
+get_first(){
+  echo $1
+  }
+Count="$(ls -1 "/usr/local/DogRandom/Scripts" | wc -w)"
+AltPath="/usr/local/DogRandom/Scripts"
+while [ "$Count" != '0' ]; do
+    grC=$Count
+    OBJ=$(get_first $LIST)
+    if  [ "$OBJ" != *".service" ]; then
+      chmod +x "$AltPath/$OBJ"
+    fi
+    LIST=$(echo $LIST | sed "s@$OBJ @""@g")
+    Count=$(echo $LIST | wc -w)
+    if [ $Count == $grC ]; then
+        Count="0"
+    fi
+    unset OBJ
+done
+
+mkdir "/usr/local/DGUNINSTALL"
+
+echo "$(date "+%H:%M - %D :") Dogetter est installé" >> "/var/log/dogetter/dogetter.log"
+mv "/usr/local/DogRandom/Scripts/uninstall.sh" "/usr/local/DGUNINSTALL/uninstall.sh"
+rm install.sh install.zip
+
+mv "/usr/local/DogRandom/Scripts/dogetter.service" "/etc/systemd/system/dogetter.service"
+
+systemctl enable dogetter.service
+
+source "/usr/local/DogRandom/Scripts/start.sh"
