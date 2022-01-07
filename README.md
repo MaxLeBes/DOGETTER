@@ -19,3 +19,5 @@
 Le programme obéit à systemctl
 
 En plus des logs system, une copie des logs peut etre trouvée dans /var/log/dogetter/dogetter.log
+
+Ecrivez simplement "dogetter" dans le terminal pour avoir un aperçue de la commande
